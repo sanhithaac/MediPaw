@@ -1,0 +1,174 @@
+/* ── Overlay — LIGHT MODE ── */
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, #eef6f4 0%, #f6f9fb 60%, #fff 100%);
+  overflow: hidden;
+  will-change: opacity, transform;
+  transform: scale(1) translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  transition: opacity 800ms cubic-bezier(0.25, 1, 0.5, 1), transform 800ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.splash-overlay--exit {
+  opacity: 0 !important;
+  transform: scale(1.03) translate3d(0, 0, 0) !important;
+  pointer-events: none;
+}
+
+/* Soft spotlight */
+.splash-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 45% at 50% 48%,
+    rgba(26,138,122,0.08) 0%,
+    rgba(232,117,106,0.05) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Subtle grid */
+.splash-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,138,122,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,138,122,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* ── Floating emojis ── */
+.splash-floaters { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.sp-floater {
+  position: absolute;
+  user-select: none;
+  filter: grayscale(0.3);
+  opacity: 0.2;
+}
+
+/* ── 3D stage ── */
+.splash-stage {
+  perspective: 1400px;
+  perspective-origin: 50% 48%;
+  position: relative;
+  z-index: 2;
+}
+
+.logo-3d-group {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.05s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Logo layers ── */
+.logo-layer {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.logo-layer--front {
+  pointer-events: auto;
+}
+
+.logo-layer-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.logo-layer--front .logo-layer-img {
+  filter: drop-shadow(0 6px 36px rgba(26,138,122,0.22)) drop-shadow(0 3px 12px rgba(232,117,106,0.12));
+}
+
+/* ── Halo glow ── */
+.logo-halo {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 600px; height: 200px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse,
+    rgba(26,138,122,0.12) 0%,
+    rgba(232,117,106,0.06) 50%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Orbit rings ── */
+.logo-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  border-radius: 50%;
+  border: 1px solid;
+  pointer-events: none;
+  transform-origin: center center;
+}
+
+.ring-teal {
+  width: 500px; height: 150px;
+  margin-top: -75px; margin-left: -250px;
+  border-color: rgba(26,138,122,0.30);
+  box-shadow: 0 0 16px rgba(26,138,122,0.12);
+}
+.ring-coral {
+  width: 580px; height: 190px;
+  margin-top: -95px; margin-left: -290px;
+  border-color: rgba(232,117,106,0.22);
+  box-shadow: 0 0 16px rgba(232,117,106,0.08);
+}
+
+/* ── Footer ── */
+.splash-footer {
+  position: absolute;
+  bottom: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+}
+
+.splash-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.sdot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a8a7a, #e8756a);
+  box-shadow: 0 0 8px rgba(26,138,122,0.4);
+}
+
+.splash-status {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a9bb5;
+}

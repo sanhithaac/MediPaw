@@ -1,0 +1,29 @@
+.bg3d-scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(234, 248, 245, 0.95) 0%, rgba(255, 244, 242, 0.95) 100%);
+  animation: bg3d-shift 16s ease-in-out infinite alternate;
+}
+
+.bg3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+@keyframes bg3d-shift {
+  0% {
+    filter: hue-rotate(0deg) saturate(1);
+  }
+  100% {
+    filter: hue-rotate(10deg) saturate(1.08);
+  }
+}

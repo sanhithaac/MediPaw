@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Brand — from the MediPaw logo */
+  --teal: #1a8a7a;
+  --teal-l: #22b8a0;
+  --teal-d: #14736a;
+  --teal-glow: rgba(26, 138, 122, 0.18);
+  --teal-glow-sm: rgba(26, 138, 122, 0.08);
+  --coral: #e8756a;
+  --coral-l: #f0908a;
+  --coral-d: #c4564b;
+  --coral-glow: rgba(232, 117, 106, 0.18);
+  --coral-glow-sm: rgba(232, 117, 106, 0.08);
+
+  /* Light mode background */
+  --bg: #f6f9fb;
+  --bg2: #eef3f7;
+  --surface: #ffffff;
+  --surface2: #f0f4f8;
+
+  /* Cards — light glass */
+  --card: rgba(255, 255, 255, 0.75);
+  --card-hover: rgba(255, 255, 255, 0.92);
+  --card-border: rgba(26, 138, 122, 0.10);
+  --card-border-bright: rgba(26, 138, 122, 0.22);
+
+  /* Text */
+  --text: #1a2332;
+  --text-secondary: #4a5e73;
+  --text-muted: #8a9bb5;
+
+  /* Priority */
+  --critical: #ef4444;
+  --critical-glow: rgba(239, 68, 68, 0.18);
+  --critical-glow-sm: rgba(239, 68, 68, 0.08);
+  --high: #f97316;
+  --high-glow: rgba(249, 115, 22, 0.18);
+  --high-glow-sm: rgba(249, 115, 22, 0.08);
+  --medium: #d4a30a;
+  --medium-glow: rgba(212, 163, 10, 0.18);
+  --medium-glow-sm: rgba(212, 163, 10, 0.08);
+  --low: #16a34a;
+  --low-glow: rgba(22, 163, 74, 0.18);
+  --low-glow-sm: rgba(22, 163, 74, 0.08);
+
+  /* Layout */
+  --navbar-h: 64px;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 1px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.05), 0 2px 6px rgba(15, 23, 42, 0.03);
+  --shadow-lg: 0 10px 40px rgba(15, 23, 42, 0.06), 0 4px 8px rgba(15, 23, 42, 0.03);
+}
+
+html { height: 100%; scroll-behavior: smooth; }
+
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+#root { min-height: 100vh; position: relative; }
+
+::selection { background: var(--teal-glow); color: var(--teal-d); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--teal), var(--coral));
+  border-radius: 3px;
+}
+
+/* Typography */
+h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; color: var(--text); }
+h1 { font-size: 2.4rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.3rem; }
+
+p { color: var(--text-secondary); }
+
+button { cursor: pointer; font-family: inherit; }
+
+img { max-width: 100%; }
+
+/* Utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--teal), var(--coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 12px var(--critical-glow); }
+  50% { box-shadow: 0 0 28px var(--critical-glow), 0 0 50px var(--critical-glow-sm); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}

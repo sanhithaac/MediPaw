@@ -1,0 +1,99 @@
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--navbar-h);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid var(--card-border);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+
+.navbar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ── Logo ── */
+.navbar-logo-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mini-logo-wrapper {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 600px;
+  will-change: transform;
+  cursor: pointer;
+  width: 130px;
+  height: 40px;
+}
+
+.mini-logo-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 130px;
+  height: 40px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.mini-logo-layer:last-child {
+  position: relative;
+  pointer-events: auto;
+}
+
+/* ── Nav links ── */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.nav-link {
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+}
+.nav-link:hover {
+  color: var(--teal-d);
+  background: var(--teal-glow-sm);
+}
+
+.nav-link--active {
+  color: var(--teal-d);
+  background: var(--teal-glow-sm);
+  font-weight: 600;
+}
+.nav-link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 16px; right: 16px;
+  height: 2px;
+  background: var(--teal);
+  border-radius: 2px;
+}
+
+/* ── CTA ── */
+.navbar-cta {
+  margin-left: auto;
+  padding: 9px 20px;
+  font-size: 0.88rem;
+}
