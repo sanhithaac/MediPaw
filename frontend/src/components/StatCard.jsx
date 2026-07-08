@@ -19,9 +19,10 @@ export default function StatCard({ priority, count, label, delay = 0 }) {
       style={{
         '--accent': meta.color,
         '--accent-badge': meta.badgeBg,
-        borderLeftColor: meta.color,
-        borderLeftWidth: '4px',
-        borderLeftStyle: 'solid',
+        borderColor: `${meta.color}33`,
+        borderWidth: '2px',
+        borderStyle: 'solid',
+        boxShadow: 'none',
       }}
     >
       <div className="stat-card-header">
@@ -32,7 +33,7 @@ export default function StatCard({ priority, count, label, delay = 0 }) {
 
       <div className="stat-card-body">
         <motion.div
-          className="stat-count"
+          className="stat-count tabular-nums"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: delay + 0.1 }}
@@ -75,11 +76,12 @@ export default function StatCard({ priority, count, label, delay = 0 }) {
           gap: 12px;
         }
         .stat-count {
-          font-family: 'Inter', 'Segoe UI', sans-serif;
+          font-family: 'Space Grotesk', monospace;
           font-size: 2.35rem;
           font-weight: 800;
           line-height: 1;
           font-variant-numeric: tabular-nums;
+          font-feature-settings: "tnum" 1;
         }
         .stat-label {
           font-size: 0.78rem;
