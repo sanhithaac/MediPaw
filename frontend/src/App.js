@@ -1,7 +1,9 @@
-import React, { useState, lazy, Suspense, startTransition } from 'react';
+import React, { useEffect, useState, lazy, Suspense, startTransition } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AnimatePresence } from 'framer-motion';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
 import Navbar from './components/Navbar';
 import Logo3DSplash from './components/Logo3DSplash';
 import './App.css';
@@ -10,7 +12,39 @@ import './App.css';
 const Background3D = lazy(() => import('./components/Background3D'));
 const Dashboard    = lazy(() => import('./pages/Dashboard'));
 const IntakePage   = lazy(() => import('./pages/IntakePage'));
-const ResultsPage  = lazy(() => import('./pages/ResultsPage'));const ContactPage  = lazy(() => import('./pages/ContactPage'));
+const ResultsPage  = lazy(() => import('./pages/ResultsPage'));
+const ContactPage  = lazy(() => import('./pages/ContactPage'));
+
+function SmoothScroll() {
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return undefined;
+
+    const lenis = new Lenis({
+      duration: 1.08,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.2,
+    });
+
+    let rafId;
+    const raf = (time) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    };
+
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
+
+  return null;
+}
+
 function App() {
   const [splashDone, setSplashDone] = useState(false);
 
@@ -44,6 +78,7 @@ function App() {
               <p>Loading Triage Center...</p>
             </div>
           }>
+            <SmoothScroll />
             <Background3D />
             <Navbar />
             <main className="main-content">

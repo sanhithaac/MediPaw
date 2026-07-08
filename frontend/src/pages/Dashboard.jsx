@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import TriageBadge from '../components/TriageBadge';
 import OrganicTriageCard from '../components/OrganicTriageCard';
 import './Dashboard.css';
@@ -22,6 +22,26 @@ const STATS = [
   { priority: 'Medium',   count: 2, label: 'Monitor Closely' },
   { priority: 'Low',      count: 1, label: 'Routine Follow-up' },
 ];
+
+const metricVariants = {
+  hidden: { opacity: 0, y: 18, scale: 0.96 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { delay: 0.28 + i * 0.08, duration: 0.48, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
+const rowVariants = {
+  hidden: { opacity: 0, x: -18 },
+  visible: (i) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.38, delay: i * 0.045, ease: [0.22, 1, 0.36, 1] },
+  }),
+  exit: { opacity: 0, x: 12, transition: { duration: 0.18 } },
+};
 
 /* ── Animated counter ── */
 function Counter({ target, duration = 1500 }) {
@@ -101,12 +121,13 @@ export default function Dashboard() {
           </p>
           <div className="dash-hero-actions">
             <motion.button
-              className="btn-primary"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
+              className="btn-primary dash-primary-action"
+              whileHover={{ y: -2, scale: 1.03 }}
+              whileTap={{ y: 0, scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 420, damping: 24 }}
               onClick={() => navigate('/intake')}
             >
-              <span>＋</span> New Patient Intake
+              <span className="dash-action-icon">+</span> New Patient Intake
             </motion.button>
             <div className="dash-live-indicator">
               <span className="live-dot" />
@@ -121,7 +142,16 @@ export default function Dashboard() {
           animate={{ x: parallax.x * -0.35, y: parallax.y * -0.28, rotateX: parallax.y * 0.2, rotateY: parallax.x * -0.2 }}
           transition={{ type: 'spring', stiffness: 80, damping: 18, mass: 0.6 }}
         >
-          <div className="dash-metric-card glass-card">
+          <motion.div
+            className="dash-metric-card glass-card"
+            custom={0}
+            variants={metricVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -4, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+          >
+            <span className="dash-card-sheen" />
             <p className="dash-metric-label">Cases Today</p>
             <div className="dash-metric-val teal-text">
               <Counter target={7} />
@@ -134,19 +164,37 @@ export default function Dashboard() {
                 transition={{ duration: 1.2, ease: 'easeOut', delay: 0.4 }}
               />
             </div>
-          </div>
-          <div className="dash-metric-card glass-card">
+          </motion.div>
+          <motion.div
+            className="dash-metric-card glass-card"
+            custom={1}
+            variants={metricVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -4, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+          >
+            <span className="dash-card-sheen" />
             <p className="dash-metric-label">Avg. AI Score Time</p>
             <div className="dash-metric-val coral-text">
               <Counter target={4} duration={1000} /><span className="dash-metric-unit">s</span>
             </div>
-          </div>
-          <div className="dash-metric-card glass-card">
+          </motion.div>
+          <motion.div
+            className="dash-metric-card glass-card"
+            custom={2}
+            variants={metricVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -4, scale: 1.015 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+          >
+            <span className="dash-card-sheen" />
             <p className="dash-metric-label">Models Active</p>
             <div className="dash-metric-val teal-text">
               <Counter target={6} duration={900} />
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </motion.section>
 
@@ -202,13 +250,17 @@ export default function Dashboard() {
           </div>
           <div className="dash-filters">
             {priorities.map(p => (
-              <button
+              <motion.button
                 key={p}
                 className={`dash-filter-btn ${filter === p ? 'dash-filter-btn--active' : ''}`}
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 480, damping: 28 }}
                 onClick={() => setFilter(p)}
               >
-                {p}
-              </button>
+                {filter === p && <motion.span className="dash-filter-active-bg" layoutId="dash-filter-active" />}
+                <span className="dash-filter-label">{p}</span>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -228,14 +280,19 @@ export default function Dashboard() {
                 <th></th>
               </tr>
             </thead>
-            <tbody>
+            <motion.tbody layout>
+              <AnimatePresence mode="popLayout">
               {filtered.map((c, i) => (
                 <motion.tr
                   key={c.id}
                   className="dash-row"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                  custom={i}
+                  variants={rowVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  layout
+                  whileHover={{ x: 4 }}
                   onClick={() => navigate(`/results/${c.id}`)}
                 >
                   <td><span className="case-id">{c.id}</span></td>
@@ -250,7 +307,8 @@ export default function Dashboard() {
                   </td>
                 </motion.tr>
               ))}
-            </tbody>
+              </AnimatePresence>
+            </motion.tbody>
           </table>
         </div>
       </motion.section>
@@ -277,8 +335,10 @@ export default function Dashboard() {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 + i * 0.07, duration: 0.45 }}
-            whileHover={{ scale: 1.04, translateZ: '10px' }}
+            whileHover={{ y: -4, scale: 1.035, translateZ: '10px' }}
+            whileTap={{ scale: 0.98 }}
           >
+            <span className="dash-card-sheen" />
             <div className="pipeline-num" style={{ color: m.color, borderColor: m.color, boxShadow: `0 0 8px ${m.color}60` }}>
               {m.num}
             </div>
