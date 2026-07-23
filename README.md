@@ -25,6 +25,8 @@ Veterinary clinics face high patient volumes, delaying the assessment of critica
   * **CNN 3:** Classifies mucous membrane color for systemic vascular perfusion (Pale/Shock vs. Healthy).
 * **Fusion Layer (ViT):**
   * **Multi-Modal Vision Transformer:** Synthesizes outputs from all models to determine Final Triage Queue Placement (Critical | High | Medium | Low).
+    <img width="991" height="678" alt="image" src="https://github.com/user-attachments/assets/6e9c4e59-aaed-4852-ba5f-b26ff56325e6" />
+
 
 ## Tech Stack
 
