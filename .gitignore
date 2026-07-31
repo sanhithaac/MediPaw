@@ -3,3 +3,18 @@ frontend/build/
 frontend/.env
 frontend/.env.local
 frontend/.eslintcache
+
+# Machine Learning, Datasets & Models
+datasets/
+data/
+*.pt
+*.pth
+*.onnx
+*.weights
+runs/
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
