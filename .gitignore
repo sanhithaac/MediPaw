@@ -18,3 +18,11 @@ __pycache__/
 venv/
 env/
 .ipynb_checkpoints/
+
+# Exclude temporary & incomplete academic runs
+model_pipeline/4_yolov8_academic_evaluation/runs/
+model_pipeline/4_yolov8_academic_evaluation/academic_results_1/
+
+# Allow production weights for real-time inference
+!model_pipeline/3_yolo_wound_detection_only/weights/best.pt
+
