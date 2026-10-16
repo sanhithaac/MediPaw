@@ -1,0 +1,90 @@
+# ==============================================================================
+# MediPaw Eye CNN — Git Ignore Configuration
+# ==============================================================================
+
+# --- Python Environments & Bytecode ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Virtual Environments ---
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# --- Operating System & IDE Files ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- Large Dataset Directories (Do NOT push raw image files to Git) ---
+# Original raw YOLO dataset
+train/images/
+train/labels/
+valid/images/
+valid/labels/
+test/images/
+test/labels/
+
+# Generated crop image directories (thousands of image files)
+datasets/eye/train/
+datasets/eye/valid/
+datasets/eye/test/
+
+# Inspection visual overlay samples (binary images)
+outputs/dataset_report/sample_overlays/
+
+# Very large plot collages (>5MB)
+outputs/sample_predictions.png
+
+# --- Model Checkpoints & Large Binaries ---
+# Note: models/eye_cnn/best_eye_model.pth is ~13.1 MB.
+# If using Git LFS, track via: git lfs track "*.pth"
+# Otherwise, keep checkpoint locally or host on GitHub Releases / HuggingFace:
+*.pth
+*.pt
+*.onnx
+*.bin
+
+# Allow model configs and class mappings to be tracked
+!models/eye_cnn/*.json
+!models/eye_cnn/model_config.json
+!models/eye_cnn/class_mapping.json
+
+# Allow metadata and evaluation reports to be tracked
+!datasets/eye/*.json
+!datasets/eye/class_weights.json
+!datasets/eye/dataset_summary.json
+!datasets/eye/crop_metadata.csv
+!outputs/*.json
+!outputs/*.csv
+!outputs/*.txt
+!outputs/*.png
+!outputs/dataset_report/*.json
+!outputs/dataset_report/*.md
+!outputs/dataset_report/*.png

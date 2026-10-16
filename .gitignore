@@ -4,9 +4,16 @@ frontend/.env
 frontend/.env.local
 frontend/.eslintcache
 
-# Machine Learning, Datasets & Models
+# Datasets, Caches & Large Files
 datasets/
 data/
+eyecnn/train/
+eyecnn/valid/
+eyecnn/test/
+eyecnn/datasets/
+eyecnn/outputs/
+skincnn/cnn1_denoised_split/
+skincnn/yolo_canine_wounds/
 *.pt
 *.pth
 *.onnx
@@ -18,3 +25,7 @@ __pycache__/
 venv/
 env/
 .ipynb_checkpoints/
+backend/static/uploads/
+backend/static/outputs/
+
+

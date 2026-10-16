@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 4
+names: ['conjunctivitis', 'entropion', 'eyelid_lump', 'healthy']
+
+roboflow:
+  workspace: jonathan-chandra
+  project: dog-eye-problems-detection
+  version: 4
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/jonathan-chandra/dog-eye-problems-detection/dataset/4

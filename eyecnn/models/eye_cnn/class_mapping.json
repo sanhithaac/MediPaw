@@ -1,0 +1,21 @@
+{
+  "classes": [
+    "conjunctivitis",
+    "entropion",
+    "eyelid_lump",
+    "healthy"
+  ],
+  "class_to_idx": {
+    "conjunctivitis": 0,
+    "entropion": 1,
+    "eyelid_lump": 2,
+    "healthy": 3
+  },
+  "idx_to_class": {
+    "0": "conjunctivitis",
+    "1": "entropion",
+    "2": "eyelid_lump",
+    "3": "healthy"
+  },
+  "num_classes": 4
+}

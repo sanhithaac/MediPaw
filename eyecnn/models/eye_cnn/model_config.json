@@ -1,0 +1,51 @@
+{
+  "model_architecture": "EyeCNN",
+  "backbone": "mobilenet_v3_small",
+  "feature_dim": 576,
+  "num_classes": 4,
+  "class_names": [
+    "conjunctivitis",
+    "entropion",
+    "eyelid_lump",
+    "healthy"
+  ],
+  "class_to_idx": {
+    "conjunctivitis": 0,
+    "entropion": 1,
+    "eyelid_lump": 2,
+    "healthy": 3
+  },
+  "input_resolution": [
+    224,
+    224
+  ],
+  "normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "training_hyperparameters": {
+    "epochs_trained": 1,
+    "best_epoch": 1,
+    "best_val_f1": 0.8438269835442123,
+    "best_val_loss": 0.4232551810207115,
+    "batch_size": 64,
+    "initial_lr": 0.0003,
+    "weight_decay": 0.0001,
+    "dropout": 0.2,
+    "seed": 42,
+    "total_time_seconds": 291.41
+  },
+  "downstream_vit_integration": {
+    "feature_tensor_name": "intermediate_pooled_features",
+    "feature_dimension": 576,
+    "how_to_extract": "call model.forward_features(tensor_224x224) or model.forward_with_features(tensor_224x224)[1]"
+  }
+}
